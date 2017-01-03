@@ -1,64 +1,30 @@
 <!doctype html>
-<html lang="en" ng-app='ShoppingListCheckOff'>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
+    <title>Narrow Down Your Menu Choice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
-    <title>Shopping List Check Off</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <style>
-      .emptyMessage {
-        font-weight: bold;
-        color: red;
-        font-size: 1.2em;
-      }
-      li {
-        margin-bottom: 7px;
-        font-size: 1.2em;
-      }
-      li > button {
-        margin-left: 6px;
-      }
-      button > span {
-        color: green;
-      }
-    </style>
+    <link rel="stylesheet" href="styles/styles.css">
   </head>
-<body>
-  <div class="container">
-  <h1>Shopping List Check Off</h1>
+<body ng-app="NarrowItDownApp">
+   <div class="container" ng-controller="NarrowItDownController as nd">
+    <h1>Narrow Down Your Chinese Menu Choice</h1>
 
-  <div class="row">
+    <div class="form-group">
+      <input type="text" ng-model="nd.searchTerm" placeholder="search term" class="form-control">
+    </div>
+    <div class="form-group narrow-button">
+      <button class="btn btn-primary" ng-click="nd.getItems(nd.searchTerm);">Narrow It Down For Me!</button>
 
-    <!-- To Buy List -->
-    <div class="col-md-6" ng-controller='ToBuyController as buyItem'>
-     <h2>To Buy:</h2>
-     <ul>
-       <li ng-repeat="item in buyItem.items">
-         Buy {{item.quantity}}  {{item.name}}
-         <button class="btn btn-default"
-         ng-click="buyItem.buyItem($index,item.name,item.quantity);">
-           <span class="glyphicon glyphicon-ok">
-           </span> Bought
-         </button>
-       </li>
-
-     </ul>
-      <div class="emptyMessage" ng-if="buyItem.AllBought()">Everything is bought!</div>
     </div>
 
-    <!-- Already Bought List -->
-    <div class="col-md-6" ng-controller='AlreadyBoughtController as boughtList'>
-     <h2>Already Bought:</h2>
-     <ul>
-       <li ng-repeat="item in boughtList.items">
-         Bought {{item.quantity}}  {{item.name}}</li>
-     </ul>
-     <div class="emptyMessage" ng-if="boughtList.NothingBought()">Nothing bought yet.</div>
-    </div>
+    <!-- found-items should be implemented as a component -->
+    <found-items items="nd.found" on-remove="nd.removeItem(index)" ></found-items>
+    <div ng-if="nd.noItemsFound()"
+    style="font-weight:bold; font-size:large; color: red;">Nothing found!</div>
   </div>
-</div>
 
 </body>
 </html>

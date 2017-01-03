@@ -1,0 +1,10 @@
+<div style="margin-left: 5px; margin-top: 20px; float: left;">
+  <table>
+    <tr ng-repeat="item in nd.items" >
+      <td> {{ item.name }} </td>
+      <td> {{ item.short_name }} </td>
+      <td> {{ item.description }} </td>
+      <td  width="160px"><button ng-click="nd.onRemove({index: $index});">Don't want this one!</button></td>
+    </tr>
+  </table>
+</div>
