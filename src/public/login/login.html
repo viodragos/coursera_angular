@@ -1,0 +1,81 @@
+<div class="login">
+  <h1 class="text-center">Customer Sign Up</h1>
+  <div>
+    <form name='regForm' novalidate>
+
+    <div class="form-group">
+      <label>First name </label>
+      <span class="msg"> &nbsp {{logCtrl.firstName}} </span>
+      <span class="err"
+          ng-if="regForm.firstName.$error.required ">
+        &nbsp  Please enter your first name
+        </span>
+      <input class="form-control" type="text" name="firstName"
+      ng-model="logCtrl.firstName" placeholder="Enter your first name"
+      autofocus required>
+    </div>
+
+    <div class="form-group">
+      <label>Last name</label>
+      <span class="msg"> &nbsp {{logCtrl.lastName}} </span>
+      <span class="err"
+          ng-if="regForm.lastName.$error.required ">
+        &nbsp  Please enter your last name
+        </span>
+      <input class="form-control" type="text" name="lastName"
+      ng-model="logCtrl.lastName"
+       placeholder="Enter your last  name" required >
+    </div>
+
+    <div class="form-group">
+      <label>Email adress</label>
+      <span class="msg"> &nbsp {{logCtrl.emailAdress}} </span>
+      <span class="err"
+          ng-if="regForm.emailAdress.$error.required || regForm.emailAdress.$invalid">
+        &nbsp  Please enter a valid email adress
+        </span>
+      <input class="form-control" type="email" name="emailAdress"
+      ng-model="logCtrl.emailAdress"
+      placeholder="Enter email adress"  required>
+    </div>
+
+    <div class="form-group">
+      <label>Phone number</label>
+      <span class="msg"> &nbsp {{logCtrl.phoneNumber}} </span>
+      <span class="err"
+          ng-if="regForm.phoneNumber.$error.required || regForm.phoneNumber.$invalid">
+          &nbsp  Please enter a valid phone number
+          </span>
+      <input class="form-control" type="phone" name="phoneNumber"
+      ng-model="logCtrl.phoneNumber"
+      placeholder="Enter your phone numder in format: ###-###-####"
+      pattern="(\d{3})-(\d{3})-(\d{4})"
+      required >
+    </div>
+
+    <div class="form-group">
+      <label>Favourite dish</label>
+        <span class="msg" > &nbsp {{logCtrl.favouriteDish}} </span>
+      <input class="form-control" type="text"
+      ng-model="logCtrl.favouriteDish"
+      placeholder="Enter your favourite dish code"
+      required ng-minlength="2" ng-maxlength="5"
+      log-chk>
+    </div>
+
+    <div class="form-group">
+      <button
+      class="btn btn-primary"
+      ng-disabled="regForm.$invalid"
+      ng-click="logCtrl.save()">Submit</button>
+    </div>
+  </div>
+</form>
+
+  <span ng-if="logCtrl.notFound" class="login-error text-center">
+    This dish is not in our offer, please see menu list.
+  </span>
+  <span ng-if="logCtrl.exist" class="msg">
+    Information was saved. Thank you for visit us.
+  </span>
+</div>
